@@ -5,18 +5,18 @@ var router = express.Router();
 var burger = require("../models/burger.js");
 
 router.get("/", function(req, res){
-    burger.all(function(data){
+    burger.selectAll(function(data){
         var hbsObj ={
             burgers: data
         };
         console.log(hbsObj);
-        res.render("index", hbsObject);
+        res.render("index", hbsObj);
     });
 });
 
-router.post("api/burgers", function(req, res){
-    burger.create([
-        'name', 'devoured'   
+router.post("/api/burgers", function(req, res){
+    burger.insertOne([
+        'burger_name', 'devoured'   
     ],[
         req.body.name, req.body.devoured
     ], function(result){
@@ -29,7 +29,7 @@ router.post("/api/burgers/:id", function(req, res){
 
     console.log("devoured: ", dev);
 
-    burger.updat({
+    burger.updateOne({
         devoured: req.body.devoured
     }, dev, function(result){
         if(result.changedRows == 0){
@@ -40,7 +40,7 @@ router.post("/api/burgers/:id", function(req, res){
     });
 });
 
-router.delete("api/cats/:id", function(req, res){
+router.delete("api/burgers/:id", function(req, res){
     var del = "id = " + req.params.id;
 
     burger.delete(del, function(res){

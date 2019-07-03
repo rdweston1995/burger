@@ -4,20 +4,21 @@ function printQuestionMarks(num){
     var array = [];
 
     for(var i = 0; i < num; i++){
-        arr.push("?");
+        array.push("?");
     }
-    return arr.toString();
+    return array.toString();
 }
 
 var orm = {
-    selectAll: function(table){
+    selectAll: function(table, cb){
         var query = "SELECT * FROM ??";
         connection.query(query, [table], function(err, res){
             if(err) throw err;
             console.table(res);
+            cb(res);
         });
     },
-    insertOne: function(){
+    insertOne: function(table, cols, vals, cb){
         var query = "INSERT INTO " + table;
 
         query += " (";
@@ -26,14 +27,30 @@ var orm = {
         query += "VALUES (";
         query += printQuestionMarks(vals.length);
         query += ") ";
-
         connection.query(query, vals, function(err, res){
+            console.log(query);
+
             if(err) throw err;
-            
+            cb(res);
         })
     },
-    updateOne: function(){
+    updateOne: function(table, devoured, id, cb){
+        var query = 'UPDATE ?? SET ?? = ? WHERE id = ?';
+        connection.query(query, [table, devoured, id], function(err, res){
+            if(err) throw err;
+            cb(res);
+        });
+    },
 
+    delete: function(table, devoured, cb){
+        var query = "DELETE FROM " + table;
+        query += " WHERE ";
+        query += devoured;
+
+        connection.query(query, function(err, result){
+            if(err) throw err;
+            cb(result);
+        });
     }
 };
 
