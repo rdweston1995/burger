@@ -14,42 +14,21 @@ router.get("/", function(req, res){
     });
 });
 
-router.post("/api/burgers", function(req, res){
-    burger.insertOne([
-        'burger_name', 'devoured'   
-    ],[
-        req.body.name, req.body.devoured
-    ], function(result){
-        res.json({id: result.insertId})
+router.post("/", function(req, res){
+    burger.insertOne(req.body.burger_name, function(){
+        res.redirect("/");
     })
 });
 
-router.post("/api/burgers/:id", function(req, res){
-    var dev = "id = " + req.params.id;
-
-    console.log("devoured: ", dev);
-
-    burger.updateOne({
-        devoured: req.body.devoured
-    }, dev, function(result){
-        if(result.changedRows == 0){
-            return res.status(404).end();
-        }else{
-            res.status(200).end();
-        }
-    });
-});
-
-router.delete("api/burgers/:id", function(req, res){
-    var del = "id = " + req.params.id;
-
-    burger.delete(del, function(res){
-        if(res.affectedRows == 0){
-            return res.status(404).end();
-        }else{
-            res.status(200).end();
-        }
+router.put("/:id", function(req, res){
+    //var dev = "id = " + req.params.id;
+    var id = req.params.id;
+    //console.log("devoured: ", dev);
+    console.log(id);
+    console.log(req.params.id);
+    burger.updateOne(req.params.id, function(){
+        res.redirect('/');
     })
-})
+});
 
 module.exports = router;
