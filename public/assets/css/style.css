@@ -1,0 +1,22 @@
+body{
+    text-align: center;
+    background-color: #f5c242;
+}
+
+#burgerPng{
+    width: 15rem;
+    height: 15rem;
+}
+
+.burgerList{
+    float:right;
+    text-align: center;
+    position: fixed;
+    left: 60%;
+}
+
+.devoured{
+    float:left;
+    position: fixed;
+    left: 20%;
+}
