@@ -23,7 +23,7 @@ var orm = {
     //IDK
     updateOne: function(table, id, cb){
         
-        var query = 'UPDATE ' + table + ' SET devoured=1 WHERE id=' + id;
+        var query = 'UPDATE ' + table + ' SET devoured="true" WHERE id=' + id;
         console.log(query);
         connection.query(query, function(err, res){
             if(err) throw err;

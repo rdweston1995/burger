@@ -1,5 +1,4 @@
-INSERT INTO burgers (burger_name)
-VALUES ("Bacon Bleu Cheese"), ("Double Bacon");
-
+INSERT INTO burgers (burger_name, devoured)
+VALUES ("Bacon Bleu Cheese", false), ("Double Bacon", false);
 
 SELECT * FROM burgers;

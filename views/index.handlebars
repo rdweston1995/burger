@@ -21,13 +21,18 @@
         </div>
         <textarea class="form-control" aria-label="With textarea"></textarea>
     </div>
-    <button type="button" class="newBurger btn btn-danger">Burgerify!</button>
-    <p>Enter a burger you want to eat Click the 'Burgerify!' button</p>
+    <button type="button" class="newBurger btn btn-danger">BURGER!</button>
+    <p>Enter a burger you want to eat Click the 'BURGER!' button</p>
 
     <div>
     <div class='devoured'>
         <h2>Burgers that have been Devoured:</h2>
         <ul>
+            {{!-- {{#each burgers}} {{#ifEquals this.devoured 'true'}}
+            <li>
+                {{this.id}}  {{this.burger_name}}
+            </li>
+            {{/if}} {{/each}} --}}
             {{#each burgers}} {{#if this.devoured}}
             <li>
                 {{this.id}}. {{this.burger_name}}
@@ -39,18 +44,32 @@
     <div class='burgerList'>
         <h2>Our Menu of Burgers</h2>
         <ul>
+            {{#each burgers}} {{#unless this.devoured}}
+            <li>
+                <form action'/{{this.id}}?_method=PUT'>
+                    <button type='submit' class='burgerAvailable'>{{this.burger_name}}</button>
+                </form>
+            </li>
+            {{/unless}}
+            {{/each}} 
+        </ul>
+    </div>
+
+    {{!-- <div class='burgerList'>
+        <h2>Our Menu of Burgers</h2>
+        <ul>
             {{#each burgers}} 
             <li>
                 {{this.id}}. {{this.burger_name}}
-                {{!-- <form action='/{{this.id}}?_method=PUT' method="POST">
+                <form action='/{{this.id}}?_method=PUT' method="POST">
                     <input type='hidden' name='devoured' value='false'>
                     <button class='eatme btn btn-warning' type='submit'>EAT ME!</button>
-                </form> --}}
+                </form>
                 <button class='eatme btn btn-warning' value={{this.id}} type='submit'>EAT ME!</button>
             </li>
             {{/each}}
         </ul>
-    </div>
+    </div> --}}
     </div>
 </body>
 </html>

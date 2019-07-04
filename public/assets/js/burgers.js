@@ -17,7 +17,7 @@ $(function(){
             location.reload();
         });
 
-        $(".form-control").val("").trim();
+        $(".form-control").val("");
     });
 
     $(".eatme").on('click', function(){
@@ -30,4 +30,6 @@ $(function(){
             location.reload();
         })
     });
+
+    
 });

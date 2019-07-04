@@ -23,6 +23,7 @@ router.post("/", function(req, res){
 router.put("/:id", function(req, res){
     //var dev = "id = " + req.params.id;
     var id = req.params.id;
+    console.log(req.body[0]);
     //console.log("devoured: ", dev);
     console.log(id);
     console.log(req.params.id);
